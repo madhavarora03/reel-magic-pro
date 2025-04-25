@@ -12,6 +12,7 @@ export const User = pgTable("users", {
   id: serial("id").primaryKey(),
   name: varchar("name").notNull(),
   email: varchar("email").notNull(),
+  password: varchar("password"),
   imageUrl: varchar("image_url"),
   isSubscribed: boolean("is_subscribed").default(false),
   subscriptionEnds: timestamp("subscription_ends"),
