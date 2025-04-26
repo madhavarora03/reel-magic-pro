@@ -49,10 +49,11 @@ export const authOptions: NextAuthOptions = {
         }
 
         return {
-          id: String(user[0].id),
+          id: user[0].id,
+          name: user[0].name,
           email: user[0].email,
-          imageUrl: user[0].imageUrl,
-          isSubscribed: user[0].isSubscribed ?? false,
+          image: user[0].imageUrl,
+          credits: user[0].credits,
         };
       },
     }),
@@ -62,15 +63,15 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.isSubscribed = user.isSubscribed;
+        token.credits = user.credits;
       }
       return token;
     },
 
     async session({ session, token }) {
       if (token) {
-        session.user.id = token.id as number;
-        session.user.isSubscribed = token.isSubscribed as boolean;
+        session.user.id = token.id as string;
+        session.user.credits = token.credits as number;
       }
       return session;
     },

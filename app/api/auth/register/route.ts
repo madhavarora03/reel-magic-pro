@@ -41,8 +41,7 @@ export async function POST(request: NextRequest) {
       name: User.name,
       email: User.email,
       imageUrl: User.imageUrl,
-      isSubscribed: User.isSubscribed,
-      subscriptionEnds: User.subscriptionEnds,
+      credits: User.credits,
     });
 
   if (newUser.length === 0) {
@@ -52,15 +51,14 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const { id, name: userName, imageUrl: userImageUrl } = newUser[0];
+  const { id, name: userName, imageUrl: userImageUrl, credits } = newUser[0];
   return NextResponse.json(
     {
       id,
       name: userName,
       email,
       imageUrl: userImageUrl,
-      isSubscribed: false,
-      subscriptionEnds: null,
+      credits,
     },
     { status: 201 }
   );
